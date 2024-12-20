@@ -1,0 +1,24 @@
+/// <summary>
+/// Calculates the area of a rectangle.
+/// </summary>
+/// <param name="modID"> The modID refers to a unique identity for your mod which will be used for handling your credits. If you want your credits to be grouped together use the same modID.</param>
+/// <param name="firstColumnName">The name of the first entry in the credit.</param>
+/// <param name = "secondColumnName">The name of the second entry in the credit.</param>
+/// <param name="thirdColumnName">The name of the third entry in the credit.</param>
+/// <param name = "fourthColumnName">The name of the fourth entry in the credit.</param>
+/// <param name="firstColor">The color of the first entry. Leave null for the default value.</param>
+/// <param name="secondColor">The color of the second entry. Leave null for the default value.</param>
+/// <param name="thirdColor">The color of the third entry. Leave null for the default value.</param>
+/// <param name="fourthColor">The color of the fourth entry. Leave null for the default value.</param>
+/// <param name="firstCommand">The command that you want to be executed for the first entry. Leave null for the default value. Check the documentation for more information on commands.</param>
+/// <param name="secondCommand">The command that you want to be executed for the second entry. Leave null for the default value. Check the documentation for more information on commands.</param>
+/// <param name="thirdCommand">The command that you want to be executed for the third entry. Leave null for the default value. Check the documentation for more information on commands.</param>
+/// <param name="fourthCommand">The command that you want to be executed for the fourth entry. Leave null for the default value. Check the documentation for more information on commands.</param>
+/// <param name="lineCommand">Enable it if you want the side by side credits. If enabled the first column name will be used for the left side title. Default value is false. Check the documentation for more information.</param>
+/// <param name="lineCount">The number of (vertical side by side) lines that will appear if line command is enabled. Default value is 0. Check the documentation for more information.</param>
+/// <param name="emptyCount">The number of blank lines between this and the next credit. Default Value is 8.</param>
+/// <param name="finishSeconds">The number of seconds that the credit is on screen. It is recommended that you don't assign this value as there is a lack of documentation on this value.</param>
+/// <param name="startWaitSeconds">The number of seconds that pass after the previous credit for this one to appear. It is recommended that you don't assign this value as there is a lack of documentation on this value.</param>
+/// <param name="lastSeconds">The number of seconds that the credit is on screen. It is recommended that you don't assign this value as there is a lack of documentation on this value.</param>
+/// <param name="tableIndex">It is recommended that you DO NOT ASSIGN this value. Allows you to overwrite an existing data asset value.</param>
+/// <returns>The area of the rectangle in square units.</returns>

@@ -57,13 +57,9 @@ namespace p3rpc.credits.framework.reloaded
             var objects = GetDependency<IUObjects>("Objects from Unreal Objects Emitter");
             this._credits = new(objects, this._unreal);
             this._modLoader.AddOrReplaceController<ICreditsApi>(this.owner, _credits);
-            _credits.StringAdded += (newString) =>
-            {
-                Console.WriteLine($"New string added: {newString}");
-            };
         }
 
-        public Type[] GetTypes() => new[] { typeof(ICreditsApi) };
+        public Type[] GetTypes() => [typeof(ICreditsApi)];
 
         private IControllerType GetDependency<IControllerType>(string modName) where IControllerType : class
         {
