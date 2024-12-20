@@ -10,7 +10,7 @@ namespace p3rpc.credits.framework.reloaded
     {
         private readonly IUnreal _unreal;
         private readonly IUObjects _uObject;
-        SortedDictionary<string, List<(FString, FString, FString, FString, byte, byte, byte, byte, bool, int, int, FColor, FColor, FColor, FColor, float, float, float, int?)>> creditsByModID = [];
+        SortedDictionary<string, List<(string, string, string, string, byte, byte, byte, byte, bool, int, int, FColor, FColor, FColor, FColor, float, float, float, int?)>> creditsByModID = [];
         
         public CreditsApi(IUObjects uObject, IUnreal unreal)
         {
@@ -69,17 +69,13 @@ namespace p3rpc.credits.framework.reloaded
             FColor intsecondColor = ColorConverter.ToFColor(secondColor.GetValueOrDefault(Color.FromArgb(255, 0, 0, 0)));
             FColor intthirdColor = ColorConverter.ToFColor(thirdColor.GetValueOrDefault(Color.FromArgb(255, 0, 0, 0)));
             FColor intfourthColor = ColorConverter.ToFColor(fourthColor.GetValueOrDefault(Color.FromArgb(255, 0, 0, 0)));
-            FString intfirstColumnName = new FString(_unreal, firstColumnName);
-            FString intsecondColumnName = new FString(_unreal, secondColumnName);
-            FString intthirdColumnName = new FString(_unreal, thirdColumnName);
-            FString intfourthColumnName = new FString(_unreal, fourthColumnName);
             if (creditsByModID.ContainsKey(modID))
             {
-                creditsByModID[modID].Add((intfirstColumnName, intsecondColumnName, intthirdColumnName, intfourthColumnName, firstCommand, secondCommand, thirdCommand, fourthCommand, lineCommand, lineCount, emptyCount, intfirstColor, intsecondColor, intthirdColor, intfourthColor, finishSeconds, startWaitSeconds, lastSeconds, tableIndex));
+                creditsByModID[modID].Add((firstColumnName, secondColumnName, thirdColumnName, fourthColumnName, firstCommand, secondCommand, thirdCommand, fourthCommand, lineCommand, lineCount, emptyCount, intfirstColor, intsecondColor, intthirdColor, intfourthColor, finishSeconds, startWaitSeconds, lastSeconds, tableIndex));
             }
             else
             {
-                creditsByModID.Add(modID, [(intfirstColumnName, intsecondColumnName, intthirdColumnName, intfourthColumnName, firstCommand, secondCommand, thirdCommand, fourthCommand, lineCommand, lineCount, emptyCount, intfirstColor, intsecondColor, intthirdColor, intfourthColor, finishSeconds, startWaitSeconds, lastSeconds, tableIndex)]);
+                creditsByModID.Add(modID, [(firstColumnName, secondColumnName, thirdColumnName, fourthColumnName, firstCommand, secondCommand, thirdCommand, fourthCommand, lineCommand, lineCount, emptyCount, intfirstColor, intsecondColor, intthirdColor, intfourthColor, finishSeconds, startWaitSeconds, lastSeconds, tableIndex)]);
             }  
         }
 
@@ -89,16 +85,16 @@ namespace p3rpc.credits.framework.reloaded
             int StaffRollIndex = 1410;
             int TableIndex = 749;
             var newItem = &CreditTable->Data.AllocatorInstance[TableIndex];
-            foreach (KeyValuePair<string, List<(FString, FString, FString, FString, byte, byte, byte, byte, bool, int, int, FColor, FColor, FColor, FColor, float, float, float, int?)>> dictitem in creditsByModID)
+            foreach (KeyValuePair<string, List<(string, string, string, string, byte, byte, byte, byte, bool, int, int, FColor, FColor, FColor, FColor, float, float, float, int?)>> dictitem in creditsByModID)
             {
                 foreach (var item in dictitem.Value)
                 {
                     newItem = (item.Item19 == null || item.Item19 > TableIndex) ? &CreditTable->Data.AllocatorInstance[TableIndex] : &CreditTable->Data.AllocatorInstance[item.Item19.GetValueOrDefault(TableIndex)];
                     newItem->StaffRollIndex = (item.Item19 == null || item.Item19 > TableIndex) ? StaffRollIndex : item.Item19.GetValueOrDefault(StaffRollIndex);
-                    newItem->FirstColumnName = item.Item1;
-                    newItem->SecondColumnName = item.Item2;
-                    newItem->ThirdColumnName = item.Item3;
-                    newItem->ForthColumnName = item.Item4;
+                    newItem->FirstColumnName = new FString(_unreal, item.Item1);
+                    newItem->SecondColumnName = new FString(_unreal, item.Item2);
+                    newItem->ThirdColumnName = new FString(_unreal, item.Item3);
+                    newItem->ForthColumnName = new FString(_unreal, item.Item4);
                     newItem->Ficolor = item.Item12;
                     newItem->Scolor = item.Item13;
                     newItem->Tcolor = item.Item14;
