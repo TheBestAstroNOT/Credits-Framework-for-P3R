@@ -11,9 +11,9 @@ namespace p3rpc.credits.framework.interfaces
     {
         public string? ModID { get; set; }
         public required string FirstColumnName { get; set; }
-        public string? SecondColumnName { get; set; } = string.Empty;
-        public string? ThirdColumnName { get; set; } = string.Empty;
-        public string? FourthColumnName { get; set; } = string.Empty;
+        public string? SecondColumnName { get; set; } = "";
+        public string? ThirdColumnName { get; set; } = "";
+        public string? FourthColumnName { get; set; } = "";
         public bool? LineCommand { get; set; } = false;
         public int? LineCount { get; set; } = 0;
         public int? EmptyCount { get; set; } = 8;
