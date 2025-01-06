@@ -9,25 +9,25 @@ namespace p3rpc.credits.framework.interfaces
 
     public class CreditEntry
     {
-        public required string ModID { get; set; }
-        public string FirstColumnName { get; set; } = string.Empty;
-        public string SecondColumnName { get; set; } = string.Empty;
-        public string ThirdColumnName { get; set; } = string.Empty;
-        public string FourthColumnName { get; set; } = string.Empty;
-        public bool LineCommand { get; set; } = false;
-        public int LineCount { get; set; } = 0;
-        public int EmptyCount { get; set; } = 8;
-        public byte FirstCommand { get; set; } = 5;
-        public byte SecondCommand { get; set; } = 5;
-        public byte ThirdCommand { get; set; } = 5;
-        public byte FourthCommand { get; set; } = 182;
-        public FColor FirstColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
-        public FColor SecondColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
-        public FColor ThirdColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
-        public FColor FourthColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
-        public float FinishSeconds { get; set; } = 0.0f;
-        public float StartWaitSeconds { get; set; } = 8.0f;
-        public float LastSeconds { get; set; } = 0.0f;
+        public string? ModID { get; set; }
+        public required string FirstColumnName { get; set; }
+        public string? SecondColumnName { get; set; } = string.Empty;
+        public string? ThirdColumnName { get; set; } = string.Empty;
+        public string? FourthColumnName { get; set; } = string.Empty;
+        public bool? LineCommand { get; set; } = false;
+        public int? LineCount { get; set; } = 0;
+        public int? EmptyCount { get; set; } = 8;
+        public byte? FirstCommand { get; set; } = 5;
+        public byte? SecondCommand { get; set; } = 5;
+        public byte? ThirdCommand { get; set; } = 5;
+        public byte? FourthCommand { get; set; } = 182;
+        public FColor? FirstColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
+        public FColor? SecondColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
+        public FColor? ThirdColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
+        public FColor? FourthColor { get; set; } = new FColor { R = 0, G = 0, B = 0, A = 255 };
+        public float? FinishSeconds { get; set; } = 0.0f;
+        public float? StartWaitSeconds { get; set; } = 8.0f;
+        public float? LastSeconds { get; set; } = 0.0f;
         public int? TableIndex { get; set; }
     }
 

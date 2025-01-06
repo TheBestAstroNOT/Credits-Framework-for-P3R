@@ -117,6 +117,7 @@ namespace p3rpc.credits.framework.reloaded
                                 entry.ModID = config.ModId;
                                 _credits.AddManualCredit(entry);
                                 AutoCredits = (AutoCredits != 2) ? 0 : 2;
+                                _logger.WriteLine($"[{_modConfig.ModId}] Loaded credits from: {Path.GetFileName(file)} from {config.ModId}", System.Drawing.Color.Orange);
                             }
                         }
                     }
@@ -124,7 +125,6 @@ namespace p3rpc.credits.framework.reloaded
                     {
                         _logger.WriteLine($"[{_modConfig.ModId}] Failed to parse credits file at: {file}", System.Drawing.Color.Orange);
                     }
-                    _logger.WriteLine($"[{_modConfig.ModId}] Found file: {file}", System.Drawing.Color.Orange);
                 }
 
                 //Toggle an autoheader if not disabled or if the config file is missing
