@@ -18,7 +18,9 @@
   "PluginData": {},
   "IsUniversalMod": false,
   "ModDependencies": [
-    "reloaded.sharedlib.hooks"
+    "reloaded.sharedlib.hooks",
+    "Unreal.ObjectsEmitter.Reloaded",
+    "UnrealEssentials"
   ],
   "OptionalDependencies": [],
   "SupportedAppId": [

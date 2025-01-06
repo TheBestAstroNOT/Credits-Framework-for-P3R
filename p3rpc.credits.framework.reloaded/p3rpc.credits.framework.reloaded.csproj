@@ -50,6 +50,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\include\Unreal.ObjectsEmitter\Unreal.ObjectsEmitter.Interfaces\Unreal.ObjectsEmitter.Interfaces.csproj" />
+    <ProjectReference Include="..\include\UnrealEssentials\UnrealEssentials.Interfaces\UnrealEssentials.Interfaces.csproj" />
     <ProjectReference Include="..\p3rpc.credits.framework.interfaces\p3rpc.credits.framework.interfaces.csproj" />
   </ItemGroup>
 

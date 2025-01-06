@@ -1,3 +1,6 @@
 [submodule "include/Unreal.ObjectsEmitter"]
 	path = include/Unreal.ObjectsEmitter
 	url = https://github.com/RyoTune/Unreal.ObjectsEmitter.git
+[submodule "include/UnrealEssentials"]
+	path = include/UnrealEssentials
+	url = https://github.com/AnimatedSwine37/UnrealEssentials
