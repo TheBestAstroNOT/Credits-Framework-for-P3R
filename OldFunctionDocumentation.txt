@@ -1,5 +1,5 @@
 /// <summary>
-/// Calculates the area of a rectangle.
+/// Adds a credit
 /// </summary>
 /// <param name="modID"> The modID refers to a unique identity for your mod which will be used for handling your credits. If you want your credits to be grouped together use the same modID.</param>
 /// <param name="firstColumnName">The name of the first entry in the credit.</param>
