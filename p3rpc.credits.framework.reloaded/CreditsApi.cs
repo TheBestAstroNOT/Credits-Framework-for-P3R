@@ -53,7 +53,7 @@ namespace p3rpc.credits.framework.reloaded
 
         public void ToggleConfigbyModID(string modID, string ModName, string config, bool configval)
         {
-            if (creditsByModID.ContainsKey(modID))
+            if (configByModID.ContainsKey(modID))
             {
                 configByModID[modID].Add(config, configval);    
             }
@@ -72,7 +72,7 @@ namespace p3rpc.credits.framework.reloaded
             int elementsnum = 750;
             foreach (KeyValuePair<string, List<CreditEntry>> dictitem in creditsByModID)
             {
-                if(configByModID.ContainsKey(dictitem.Key) && configByModID[dictitem.Key].ContainsKey("autoheader") && configByModID[dictitem.Key]["autoheader"])
+                if(configByModID.ContainsKey(dictitem.Key) && (configByModID[dictitem.Key].ContainsKey("autoheader") && configByModID[dictitem.Key]["autoheader"]))
                 {
                     elementsnum++;
                 }
@@ -84,7 +84,7 @@ namespace p3rpc.credits.framework.reloaded
 
             //Allocate memory for the new AllocatorInstance
             FStaffRollTableData* AllocatorInstance = (FStaffRollTableData*)_unreal.FMalloc(128 * (elementsnum+18), 0);
-
+            
             //Get the elements from the original AllocatorInstance
             FStaffRollTableData* elements = obj->Data.AllocatorInstance;
 
@@ -112,7 +112,6 @@ namespace p3rpc.credits.framework.reloaded
             obj->Data.Max = elementsnum+18;
             int StaffRollIndex = 1410;
             int TableIndex = 750;
-
             foreach (KeyValuePair<string, List<CreditEntry>> dictitem in creditsByModID)
             {
                 if (configByModID.ContainsKey(dictitem.Key) && configByModID[dictitem.Key].ContainsKey("autoheader") && configByModID[dictitem.Key]["autoheader"])
@@ -120,6 +119,17 @@ namespace p3rpc.credits.framework.reloaded
                     var headerItem = &obj->Data.AllocatorInstance[TableIndex];
                     headerItem->FirstColumnName = _unreal.FString(ModNameByModID[dictitem.Key]);
                     headerItem->Command = 1;
+                    headerItem->Fisize = 1;
+                    headerItem->Fistyle = 0;
+                    headerItem->Ficolor = new FColor { R = 0, G = 0, B = 0, A = 255 };
+                    headerItem->EmptyCount = 0;
+                    headerItem->StartWaitSeconds = 8.0f;
+                    headerItem->LastSeconds = 0.0f;
+                    headerItem->FinishSeconds = 0.0f;
+                    headerItem->StaffRollIndex = StaffRollIndex;
+                    TableIndex++;
+                    StaffRollIndex=StaffRollIndex+1;
+                    Console.WriteLine($"Auto Header Added: {ModNameByModID[dictitem.Key]}");
                 }
                 foreach (var item in dictitem.Value)
                 {
@@ -127,14 +137,14 @@ namespace p3rpc.credits.framework.reloaded
                         ? &obj->Data.AllocatorInstance[TableIndex]
                         : &obj->Data.AllocatorInstance[item.TableIndex.GetValueOrDefault(TableIndex)];
                     newItem->StaffRollIndex = (item.TableIndex == null || item.TableIndex > TableIndex) ? StaffRollIndex : item.TableIndex.GetValueOrDefault(StaffRollIndex);
-                    newItem->FirstColumnName = _unreal.FString(item.FirstColumnName);
-                    newItem->SecondColumnName = _unreal.FString(item.SecondColumnName);
-                    newItem->ThirdColumnName = _unreal.FString(item.ThirdColumnName);
-                    newItem->ForthColumnName = _unreal.FString(item.FourthColumnName);
+                    newItem->FirstColumnName = _unreal.FString(item.FirstColumnName ?? "");
+                    newItem->SecondColumnName = _unreal.FString(item.SecondColumnName ?? "");
+                    newItem->ThirdColumnName = _unreal.FString(item.ThirdColumnName ?? "");
+                    newItem->ForthColumnName = _unreal.FString(item.FourthColumnName ?? "s");
                     newItem->Ficolor = item.FirstColor ?? new FColor { R = 0, G = 0, B = 0, A = 255 };
-                    newItem->Scolor = item.SecondColor ?? new FColor { R = 0, G = 0, B = 0, A = 255 }; ;
-                    newItem->Tcolor = item.ThirdColor ?? new FColor { R = 0, G = 0, B = 0, A = 255 }; ;
-                    newItem->Focolor = item.FourthColor ?? new FColor { R = 0, G = 0, B = 0, A = 255 }; ;
+                    newItem->Scolor = item.SecondColor ?? new FColor { R = 0, G = 0, B = 0, A = 255 };
+                    newItem->Tcolor = item.ThirdColor ?? new FColor { R = 0, G = 0, B = 0, A = 255 };
+                    newItem->Focolor = item.FourthColor ?? new FColor { R = 0, G = 0, B = 0, A = 255 };
                     newItem->Fisize = 1;
                     newItem->Ssize = 1;
                     newItem->Tsize = 1;
@@ -155,7 +165,7 @@ namespace p3rpc.credits.framework.reloaded
                     newItem->EmptyCount = item.EmptyCount ?? 8;
                     StaffRollIndex = (item.TableIndex == null || item.TableIndex > TableIndex) ? StaffRollIndex + (item.EmptyCount ?? 8) + 1 : StaffRollIndex;
                     TableIndex = (item.TableIndex == null || item.TableIndex > TableIndex) ? TableIndex + 1 : TableIndex;
-                    obj->Data.Num = (item.TableIndex == null || item.TableIndex > TableIndex) ? obj->Data.Num+1 : obj->Data.Num;
+                    //obj->Data.Num = (item.TableIndex == null || item.TableIndex > TableIndex) ? obj->Data.Num+1 : obj->Data.Num;
                 }
             }
 
@@ -163,12 +173,13 @@ namespace p3rpc.credits.framework.reloaded
             var newitem = &obj->Data.AllocatorInstance[749];
             obj->Data.AllocatorInstance[749].FinishSeconds = 0.0f;
             obj->Data.AllocatorInstance[749].LastSeconds = 0.0f;
+            obj->Data.AllocatorInstance[749].EmptyCount = 10;
             newitem = &obj->Data.AllocatorInstance[TableIndex];
             newitem->FinishSeconds = 490.0f;
             newitem->LastSeconds = 5.0f;
             newitem->FirstColumnName = _unreal.FString("5");
             newitem->Command = 3;
-
+            obj->Data.Num = TableIndex + 1;
             //Finally return the object to replace the ingame credits
             return obj;
         }
