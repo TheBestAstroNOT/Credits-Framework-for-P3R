@@ -174,6 +174,8 @@ namespace p3rpc.credits.framework.reloaded
             obj->Data.AllocatorInstance[749].FinishSeconds = 0.0f;
             obj->Data.AllocatorInstance[749].LastSeconds = 0.0f;
             obj->Data.AllocatorInstance[749].EmptyCount = 10;
+            newitem = &obj->Data.AllocatorInstance[TableIndex-1];
+            newitem->EmptyCount = 15;
             newitem = &obj->Data.AllocatorInstance[TableIndex];
             newitem->FinishSeconds = 490.0f;
             newitem->LastSeconds = 5.0f;

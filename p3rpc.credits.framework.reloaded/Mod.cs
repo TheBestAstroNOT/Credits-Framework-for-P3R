@@ -71,6 +71,9 @@ namespace p3rpc.credits.framework.reloaded
         {
             if (!config.ModDependencies.Contains(_modConfig.ModId))
             {
+                _credits.AddManualCredit(new CreditEntry { ModID = config.ModId, FirstColumnName = config.ModAuthor, FirstCommand = 5 });
+                _credits.ToggleConfigbyModID(config.ModId, config.ModName, "autoheader", true);
+                _logger.WriteLine($"[{_modConfig.ModId}] Enabled Autoheader and AutoAuthor for {config.ModId}.", System.Drawing.Color.Orange);
                 return;
             }
 
