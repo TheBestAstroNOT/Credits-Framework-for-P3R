@@ -8,7 +8,8 @@ export default defineConfig({
 		starlight({
 			title: 'Credits Framework for P3R',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/TheBestAstroNOT/Credits-Framework-for-P3R',
+				discord: 'https://discord.gg/naoto'
 			},
 			sidebar: [
 				{
