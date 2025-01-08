@@ -5,6 +5,11 @@ tableOfContents:
   minHeadingLevel: 1
   maxHeadingLevel: 3
 ---
+import { Image } from 'astro:assets';
+import P3RLogo from '../../../assets/images/p3rlogo.png';
+import Command0 from '../../../assets/images/0.png';
+import Command1 from '../../../assets/images/1.png';
+import Command5 from '../../../assets/images/5.png';
 
 ## Introduction
 
@@ -17,7 +22,7 @@ SecondCommand is the command for the SecondColumnName and so on..
 
 To add images to the credits. Set the command value to 3. After that in the Column value enter the ID of the image you want to load. For example it's 0 for the Persona 3 Reload Logo. More information about images will be added soon.
 <Image
-  src="../images/p3rlogo.png"
+  src={P3RLogo}
   alt="Unable to fetch image for command 3"
 />
 
@@ -26,7 +31,7 @@ To add images to the credits. Set the command value to 3. After that in the Colu
 To set the text to be a heading, set the command value to 0.
 
 <Image
-  src="/images/0.png"
+  src={Command0}
   alt="Unable to fetch image for command 0"
 />
 
@@ -35,7 +40,7 @@ To set the text to be a heading, set the command value to 0.
 To set the text to be a subheading, set the command value to 1.
 
 <Image
-  src="/images/1.png"
+  src={Command1}
   alt="Unable to fetch image for command 0"
 />
 
@@ -44,6 +49,6 @@ To set the text to be a subheading, set the command value to 1.
 To set the text to appear like the ordinary text, set the command value to 5.
 
 <Image
-  src="/images/5.png"
+  src={Command5}
   alt="Unable to fetch image for command 5"
 />
