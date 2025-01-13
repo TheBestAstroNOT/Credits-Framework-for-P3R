@@ -169,7 +169,7 @@ namespace p3rpc.credits.framework.reloaded
                 }
             }
 
-            //Add a cute butterfly icon at the end
+            //Add a cute butterfly icon at the end and move the custom timings from the atlus logo to the butterfly icon
             var newitem = &obj->Data.AllocatorInstance[749];
             obj->Data.AllocatorInstance[749].FinishSeconds = 0.0f;
             obj->Data.AllocatorInstance[749].LastSeconds = 0.0f;
@@ -182,6 +182,7 @@ namespace p3rpc.credits.framework.reloaded
             newitem->FirstColumnName = _unreal.FString("5");
             newitem->Command = 3;
             obj->Data.Num = TableIndex + 1;
+            
             //Finally return the object to replace the ingame credits
             return obj;
         }

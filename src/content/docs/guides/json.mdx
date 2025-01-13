@@ -1,0 +1,41 @@
+---
+title: Automated Credit Options
+description: A guide to some options for automated credits using Credits Framework.
+tableOfContents:
+  minHeadingLevel: 1
+  maxHeadingLevel: 3
+---
+import { Image } from 'astro:assets';
+
+# Introduction
+
+I know that adding credits, might seem daunting to a lot of people. This is why I added options to automate for some things for you.
+
+
+:::note
+To use these options you will need to create a Credits folder in your mod and inside that you will need to create a config.json with the following contents.
+```json
+{
+    "autoModHeader": false,
+    "autoModAuthor": false
+}
+```
+:::
+
+# Automatic Options
+
+### Automatic Heading
+
+This option is known as autoModHeader in the config.json and just set it's value to true in config.json to enable it. This will add the name of your mod to the credits automatically. The name will be the name which appears when you select your mod in the Reloaded Mod Manager.
+
+:::caution
+Regardless of whether or not you chose to enable this, it will be forcefully if you enable autoModAuthor.
+:::
+
+### Automatic ModAuthor
+
+This option is known as autoModAuthor in the config.json and just set it's value in config.json to true to enable it. This will add the name of your mod and the authors of the mod (as seen in the Reloaded Mod Manger) to the credits automatically.
+
+:::caution
+It is also enabled by default for mods which don't have a dependency on Credits Framework, don't have a config.json or have no credits added but have a dependency on Credits Framework.
+:::
