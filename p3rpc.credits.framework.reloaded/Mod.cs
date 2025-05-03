@@ -87,11 +87,11 @@ namespace p3rpc.credits.framework.reloaded
                 {
                     try
                     {
-                        if (Path.GetFileName(file).ToLower() == "config.json")
+                        if (Path.GetFileName(file).Equals("config.json", StringComparison.CurrentCultureIgnoreCase))
                         {
                             var json = File.ReadAllText(file);
                             ConfigJson configjson = JsonSerializer.Deserialize<ConfigJson>(json);
-                            if (configjson.autoModAuthor)
+                            if (configjson.AutoModAuthor)
                             {
                                 _credits.DeleteCredit(config.ModId);
                                 _credits.AddManualCredit(new CreditEntry { ModID=config.ModId, FirstColumnName=config.ModAuthor, FirstCommand=5});
@@ -100,7 +100,7 @@ namespace p3rpc.credits.framework.reloaded
                                 AutoCredits = 0; //Disable autoheader if autoauthor is enabled
                                 return; //Exit if autoauthor is enabled
                             }
-                            if (configjson.autoModHeader)
+                            if (configjson.AutoModHeader)
                             {
                                 _credits.ToggleConfigbyModID(config.ModId, config.ModName, "autoheader", true);
                                 _logger.WriteLine($"[{_modConfig.ModId}] Enabled Autoheader for {config.ModId}", System.Drawing.Color.Orange);
@@ -114,8 +114,13 @@ namespace p3rpc.credits.framework.reloaded
                         else
                         {
                             var json = File.ReadAllText(file);
-                            List<CreditEntry> creditEntries = JsonSerializer.Deserialize<List<CreditEntry>>(json);
-                            foreach (var entry in creditEntries)
+                            List<CreditEntry>? creditEntries = JsonSerializer.Deserialize<List<CreditEntry>>(json);
+                            if(creditEntries is null)
+                            {
+                                _logger.WriteLine($"[{_modConfig.ModId}] Failed to parse credits file at: {file}", System.Drawing.Color.Orange);
+                                continue;
+                            }
+                            foreach (CreditEntry entry in creditEntries)
                             {
                                 entry.ModID = config.ModId;
                                 _credits.AddManualCredit(entry);
@@ -152,8 +157,8 @@ namespace p3rpc.credits.framework.reloaded
 
         public struct ConfigJson
         {
-            public bool autoModHeader { get; set; }
-            public bool autoModAuthor { get; set; }
+            public bool AutoModHeader { get; set; }
+            public bool AutoModAuthor { get; set; }
         }
 
             #region Standard Overrides

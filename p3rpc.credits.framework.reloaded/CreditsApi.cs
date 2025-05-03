@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using p3rpc.credits.framework.interfaces;
-using p3rpc.credits.framework.reloaded.Configuration;
 using Unreal.ObjectsEmitter.Interfaces;
 using Unreal.ObjectsEmitter.Interfaces.Types;
 using UnrealEssentials.Interfaces;
@@ -33,29 +32,26 @@ namespace p3rpc.credits.framework.reloaded
 
         public void AddManualCredit(CreditEntry credit)
         {
-            if (creditsByModID.ContainsKey(credit.ModID))
+            if (creditsByModID.TryGetValue(credit.ModID!, out List<CreditEntry>? value))
             {
-                creditsByModID[credit.ModID].Add(credit);         
+                value.Add(credit);         
             }
             else
             {
-                creditsByModID.Add(credit.ModID, new List<CreditEntry> { credit });
+                creditsByModID.Add(credit.ModID!, [credit]);
             }
         }
 
         public void DeleteCredit(string modID)
         {
-            if (creditsByModID.ContainsKey(modID))
-            {
-                creditsByModID.Remove(modID);
-            }
+            creditsByModID.Remove(modID);
         }
 
         public void ToggleConfigbyModID(string modID, string ModName, string config, bool configval)
         {
-            if (configByModID.ContainsKey(modID))
+            if (configByModID.TryGetValue(modID, out Dictionary<string, bool>? value))
             {
-                configByModID[modID].Add(config, configval);    
+                value.Add(config, configval);    
             }
             else
             {
@@ -72,7 +68,7 @@ namespace p3rpc.credits.framework.reloaded
             int elementsnum = 750;
             foreach (KeyValuePair<string, List<CreditEntry>> dictitem in creditsByModID)
             {
-                if(configByModID.ContainsKey(dictitem.Key) && (configByModID[dictitem.Key].ContainsKey("autoheader") && configByModID[dictitem.Key]["autoheader"]))
+                if(configByModID.TryGetValue(dictitem.Key, out Dictionary<string, bool>? value) && (value.TryGetValue("autoheader", out bool headerConfig) && headerConfig))
                 {
                     elementsnum++;
                 }
@@ -114,7 +110,7 @@ namespace p3rpc.credits.framework.reloaded
             int TableIndex = 750;
             foreach (KeyValuePair<string, List<CreditEntry>> dictitem in creditsByModID)
             {
-                if (configByModID.ContainsKey(dictitem.Key) && configByModID[dictitem.Key].ContainsKey("autoheader") && configByModID[dictitem.Key]["autoheader"])
+                if (configByModID.TryGetValue(dictitem.Key, out Dictionary<string, bool>? value) && value.TryGetValue("autoheader", out bool headerConfig) && headerConfig)
                 {
                     var headerItem = &obj->Data.AllocatorInstance[TableIndex];
                     headerItem->FirstColumnName = _unreal.FString(ModNameByModID[dictitem.Key]);
@@ -128,7 +124,7 @@ namespace p3rpc.credits.framework.reloaded
                     headerItem->FinishSeconds = 0.0f;
                     headerItem->StaffRollIndex = StaffRollIndex;
                     TableIndex++;
-                    StaffRollIndex=StaffRollIndex+1;
+                    StaffRollIndex++;
                     Console.WriteLine($"Auto Header Added: {ModNameByModID[dictitem.Key]}");
                 }
                 foreach (var item in dictitem.Value)
@@ -165,7 +161,6 @@ namespace p3rpc.credits.framework.reloaded
                     newItem->EmptyCount = item.EmptyCount ?? 8;
                     StaffRollIndex = (item.TableIndex == null || item.TableIndex > TableIndex) ? StaffRollIndex + (item.EmptyCount ?? 8) + 1 : StaffRollIndex;
                     TableIndex = (item.TableIndex == null || item.TableIndex > TableIndex) ? TableIndex + 1 : TableIndex;
-                    //obj->Data.Num = (item.TableIndex == null || item.TableIndex > TableIndex) ? obj->Data.Num+1 : obj->Data.Num;
                 }
             }
 

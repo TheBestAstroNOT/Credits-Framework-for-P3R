@@ -1,6 +1,4 @@
 ﻿using p3rpc.credits.framework.reloaded.Template.Configuration;
-using Reloaded.Mod.Interfaces.Structs;
-using System.ComponentModel;
 
 namespace p3rpc.credits.framework.reloaded.Configuration
 {
