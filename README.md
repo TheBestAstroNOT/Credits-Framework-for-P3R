@@ -1,2 +1,9 @@
+# License
+Copyright © 2025 TheBestAstroNOT
+
+All rights reserved.
+
+This mod may not be used, copied, modified, or distributed without prior written permission from the author.
+
 # Credits Framework for P3R
 You can use this framework to add any names or inbuilt P3R images (only those which are used in the credits) to the end credits of the game. Here's a guide to using it via a JSON https://thebestastronot.github.io/Credits-Framework-for-P3R/. You may also add this mod as a git submodule to your project and use it's API to add credits. Using the API provides a lot more flexibility and even allows you to replace existing Crdits (NOT RECOMMENDED).
