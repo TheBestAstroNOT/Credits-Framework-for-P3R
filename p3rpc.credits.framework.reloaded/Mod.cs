@@ -190,7 +190,8 @@ namespace p3rpc.credits.framework.reloaded
 
             /// <summary>
             /// Gets or sets whether to automatically add the mod author to the credits.
-            /// When true, removes all existing credits for the mod and adds only the author.
+            /// When true, all existing custom credits for the mod are removed and only the author name is added.
+            /// This is useful for simple mods that only want to show the author without additional credits.
             /// </summary>
             public bool AutoModAuthor { get; set; }
         }

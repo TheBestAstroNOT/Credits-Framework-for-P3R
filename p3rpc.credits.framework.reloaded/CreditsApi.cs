@@ -234,7 +234,7 @@ namespace p3rpc.credits.framework.reloaded
         public unsafe struct FStaffRollTableData
         {
             /// <summary>
-            /// Gets or sets the index of this entry in the staff roll sequence.
+            /// Gets or sets the zero-based index of this entry in the staff roll sequence.
             /// </summary>
             [FieldOffset(0x0000)] public int StaffRollIndex;
 
@@ -319,7 +319,8 @@ namespace p3rpc.credits.framework.reloaded
             [FieldOffset(0x005F)] public byte Fosize;
 
             /// <summary>
-            /// Gets or sets the command for the first column (determines formatting/layout behavior).
+            /// Gets or sets the primary command that controls how this credit entry is displayed and formatted.
+            /// This corresponds to the FirstCommand property in the API.
             /// </summary>
             [FieldOffset(0x0060)] public byte Command;
 

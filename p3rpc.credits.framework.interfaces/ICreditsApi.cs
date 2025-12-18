@@ -122,7 +122,7 @@ namespace p3rpc.credits.framework.interfaces
         public float? StartWaitSeconds { get; set; } = 8.0f;
 
         /// <summary>
-        /// Gets or sets the number of seconds that the credit is on screen.
+        /// Gets or sets the duration in seconds for the final display phase of the credit.
         /// It is recommended that you don't assign this value as there is a lack of documentation on this value.
         /// Default is 0.0f.
         /// </summary>
@@ -130,7 +130,7 @@ namespace p3rpc.credits.framework.interfaces
 
         /// <summary>
         /// Gets or sets the table index. It is recommended that you DO NOT ASSIGN this value.
-        /// Allows you to overwrite an existing data asset value.
+        /// Allows you to overwrite an existing data asset value at the specified zero-based index.
         /// </summary>
         public int? TableIndex { get; set; }
     }
