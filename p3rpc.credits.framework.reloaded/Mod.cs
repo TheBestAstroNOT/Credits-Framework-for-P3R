@@ -13,7 +13,7 @@ using UnrealEssentials.Interfaces;
 namespace p3rpc.credits.framework.reloaded
 {
     /// <summary>
-    /// Your mod logic goes here.
+    /// Main mod class for the Credits Framework. Handles initialization and mod loading events.
     /// </summary>
     public class Mod : ModBase, IExports // <= Do not Remove.
     {
@@ -50,6 +50,12 @@ namespace p3rpc.credits.framework.reloaded
         private readonly CreditsApi _credits;
         private readonly IUnreal _unreal;
         private readonly IUnrealEssentials _unrealessentials;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Mod"/> class.
+        /// Sets up dependencies and registers the Credits API.
+        /// </summary>
+        /// <param name="context">The mod context containing configuration and dependencies.</param>
         public Mod(ModContext context)
         {
             _modLoader = context.ModLoader;
@@ -67,6 +73,12 @@ namespace p3rpc.credits.framework.reloaded
             this._modLoader.ModLoading += OnModLoading;
         }
 
+        /// <summary>
+        /// Event handler that is called when a mod is loading.
+        /// Automatically loads credits from JSON files in the mod's Credits directory.
+        /// </summary>
+        /// <param name="mod">The mod that is loading.</param>
+        /// <param name="config">The configuration of the loading mod.</param>
         private void OnModLoading(IModV1 mod, IModConfigV1 config)
         {
             if (!config.ModDependencies.Contains(_modConfig.ModId))
@@ -144,8 +156,19 @@ namespace p3rpc.credits.framework.reloaded
             }
         }
 
+        /// <summary>
+        /// Gets the types exported by this mod.
+        /// </summary>
+        /// <returns>An array containing the ICreditsApi type.</returns>
         public Type[] GetTypes() => [typeof(ICreditsApi)];
 
+        /// <summary>
+        /// Gets a dependency from the mod loader.
+        /// </summary>
+        /// <typeparam name="IControllerType">The type of controller to retrieve.</typeparam>
+        /// <param name="modName">The name of the mod dependency.</param>
+        /// <returns>The controller instance.</returns>
+        /// <exception cref="Exception">Thrown when the dependency cannot be found.</exception>
         private IControllerType GetDependency<IControllerType>(string modName) where IControllerType : class
         {
             var controller = _modLoader.GetController<IControllerType>();
@@ -155,9 +178,20 @@ namespace p3rpc.credits.framework.reloaded
 
         }
 
+        /// <summary>
+        /// Represents the configuration JSON file format for controlling automatic header and author behavior.
+        /// </summary>
         public struct ConfigJson
         {
+            /// <summary>
+            /// Gets or sets whether to automatically add a header for this mod's credits section.
+            /// </summary>
             public bool AutoModHeader { get; set; }
+
+            /// <summary>
+            /// Gets or sets whether to automatically add the mod author to the credits.
+            /// When true, removes all existing credits for the mod and adds only the author.
+            /// </summary>
             public bool AutoModAuthor { get; set; }
         }
 

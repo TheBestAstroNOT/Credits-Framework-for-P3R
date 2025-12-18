@@ -2,6 +2,10 @@
 
 namespace p3rpc.credits.framework.reloaded.Configuration
 {
+    /// <summary>
+    /// Configuration class for the Credits Framework mod.
+    /// Inherits from the base Configurable class.
+    /// </summary>
     public class Config : Configurable<Config> { }
 
     /// <summary>
